@@ -1,0 +1,35 @@
+{
+  "name": "postcss-safe-parser",
+  "version": "0.0.0",
+  "description": "Fault tolerance CSS parser for PostCSS",
+  "keywords": [
+    "css",
+    "postcss",
+    "parser",
+    "fault tolerance"
+  ],
+  "author": "Andrey Sitnik <andrey@sitnik.ru>",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url":  "https://github.com/postcss/postcss-safe-parser.git"
+  },
+  "dependencies": {
+    "babel-core": "5.8.20",
+    "postcss":    "postcss/postcss#valac"
+  },
+  "devDependencies": {
+    "gulp-json-editor": "2.2.1",
+    "babel-eslint":     "4.0.5",
+    "gulp-eslint":      "1.0.0",
+    "gulp-babel":       "5.2.0",
+    "gulp-mocha":       "2.1.3",
+    "fs-extra":         "0.22.1",
+    "mocha":            "2.2.5",
+    "gulp":             "3.9.0",
+    "chai":             "3.2.0"
+  },
+  "scripts": {
+    "test": "gulp"
+  }
+}
