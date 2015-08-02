@@ -4,12 +4,28 @@
      title="Philosopher’s stone, logo of PostCSS"
      src="http://postcss.github.io/postcss/logo.svg">
 
-Fault tolerance CSS parser for [PostCSS].
+Fault tolerance CSS parser for [PostCSS]. It will fix any find syntax errors
+in CSS, so it will parse any input string. It is useful for:
 
-[PostCSS]: https://github.com/postcss/postcss
-[ci-img]:  https://img.shields.io/travis/postcss/postcss-safe-parser.svg
-[ci]:      https://travis-ci.org/postcss/postcss-safe-parser
+* Parse legacy code with many hacks. For example, it can parse all examples
+  from [Browserhacks].
+* Works with demo tools with live input like [Autoprefixer demo].
+
+[Autoprefixer demo]: http://simevidas.jsbin.com/gufoko/quiet
+[Browserhacks]:      http://browserhacks.com/
+[PostCSS]:           https://github.com/postcss/postcss
+[ci-img]:            https://img.shields.io/travis/postcss/postcss-safe-parser.svg
+[ci]:                https://travis-ci.org/postcss/postcss-safe-parser
 
 <a href="https://evilmartians.com/?utm_source=postcss">
 <img src="https://evilmartians.com/badges/sponsored-by-evil-martians.svg" alt="Sponsored by Evil Martians" width="236" height="54">
 </a>
+
+## Usage
+
+```js
+var safe = require('postcss-safe-parser');
+postcss(plugins).process(badCss, { parser: safe }).then(function (result) {
+    // result will contains fixed and processed CSS
+})
+```
