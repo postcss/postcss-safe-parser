@@ -61,7 +61,9 @@ gulp.task('test', () => {
 gulp.task('integration', (done) => {
     let real = require('postcss-parser-tests/real');
     let safe = require('./');
-    real(safe, [['Browserhacks', 'http://browserhacks.com/']], done);
+    real(done, [['Browserhacks', 'http://browserhacks.com/']], (css) => {
+        return safe(css).toResult({ map: { annotation: false } });
+    });
 });
 
 // Common
