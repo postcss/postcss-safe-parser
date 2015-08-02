@@ -30,7 +30,7 @@ gulp.task('build:package', ['clean'], () => {
     let editor = require('gulp-json-editor');
     gulp.src('./package.json')
         .pipe(editor( (p) => {
-            p.main = 'lib/postcss';
+            p.main = 'lib/safe-parse';
             p.devDependencies['babel-core'] = p.dependencies['babel-core'];
             delete p.dependencies['babel-core'];
             return p;
@@ -50,11 +50,20 @@ gulp.task('lint', () => {
         .pipe(eslint.failAfterError());
 });
 
+// Test
+
 gulp.task('test', () => {
+    require('./');
     let mocha = require('gulp-mocha');
     return gulp.src('test/*.js', { read: false }).pipe(mocha());
 });
 
+gulp.task('integration', (done) => {
+    let real = require('postcss-parser-tests/real');
+    let safe = require('./');
+    real(safe, [['Browserhacks', 'http://browserhacks.com/']], done);
+});
+
 // Common
 
-gulp.task('default', ['lint', 'test']);
+gulp.task('default', ['lint', 'test', 'integration']);
