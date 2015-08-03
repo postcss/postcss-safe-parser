@@ -4,8 +4,8 @@
      title="Philosopher’s stone, logo of PostCSS"
      src="http://postcss.github.io/postcss/logo.svg">
 
-Fault tolerance CSS parser for [PostCSS]. It will fix any find syntax errors
-in CSS, so it will parse any input string. It is useful for:
+A fault-tolerant CSS parser for [PostCSS], which will find & fix syntax errors,
+capable of parsing any input. It is useful for:
 
 * Parse legacy code with many hacks. For example, it can parse all examples
   from [Browserhacks].
@@ -27,5 +27,5 @@ in CSS, so it will parse any input string. It is useful for:
 var safe = require('postcss-safe-parser');
 postcss(plugins).process(badCss, { parser: safe }).then(function (result) {
     // result will contains fixed and processed CSS
-})
+});
 ```

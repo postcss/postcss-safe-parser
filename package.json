@@ -1,12 +1,12 @@
 {
   "name": "postcss-safe-parser",
   "version": "0.0.0",
-  "description": "Fault tolerance CSS parser for PostCSS",
+  "description": "Fault-tolerant CSS parser for PostCSS",
   "keywords": [
     "css",
     "postcss",
     "parser",
-    "fault tolerance"
+    "fault tolerant"
   ],
   "author": "Andrey Sitnik <andrey@sitnik.ru>",
   "license": "MIT",
