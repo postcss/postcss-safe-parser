@@ -5,10 +5,10 @@
      src="http://postcss.github.io/postcss/logo.svg">
 
 A fault-tolerant CSS parser for [PostCSS], which will find & fix syntax errors,
-capable of parsing any input. It is useful for:
+capable of parsing any input. It is useful for:
 
 * Parse legacy code with many hacks. For example, it can parse all examples
-  from [Browserhacks].
+  from [Browserhacks].
 * Works with demo tools with live input like [Autoprefixer demo].
 
 [Autoprefixer demo]: http://simevidas.jsbin.com/gufoko/quiet
