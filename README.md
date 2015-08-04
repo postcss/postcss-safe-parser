@@ -24,8 +24,10 @@ capable of parsing any input. It is useful for:
 ## Usage
 
 ```js
-var safe = require('postcss-safe-parser');
+var safe   = require('postcss-safe-parser');
+var badCss = 'a {';
+
 postcss(plugins).process(badCss, { parser: safe }).then(function (result) {
-    // result will contains fixed and processed CSS
+    result.css //= 'a {}'
 });
 ```
