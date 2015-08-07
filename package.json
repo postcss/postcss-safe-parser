@@ -15,8 +15,8 @@
     "url":  "https://github.com/postcss/postcss-safe-parser.git"
   },
   "dependencies": {
-    "postcss": "postcss/postcss#valac",
-    "babel":   "5.8.20"
+    "babel-core": "5.8.21",
+    "postcss":    "postcss/postcss#valac"
   },
   "devDependencies": {
     "postcss-parser-tests": "postcss/postcss-parser-tests",
@@ -31,7 +31,7 @@
     "del":                  "1.2.0"
   },
   "scripts": {
-    "prepublish": "babel lib/*.es6 --out-dir .",
-    "test":       "gulp"
+    "postinstall": "node ./es6-hook.js",
+    "test":        "gulp"
   }
 }
