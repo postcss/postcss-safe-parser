@@ -60,7 +60,6 @@ gulp.task('integration', (done) => {
     require('babel-core/register')({ extensions: ['.es6'], ignore: false });
     let real = require('postcss-parser-tests/real');
     let safe = require('./');
-    
     real(done, [['Browserhacks', 'http://browserhacks.com/']], (css) => {
         return safe(css).toResult({ map: { annotation: false } });
     });
