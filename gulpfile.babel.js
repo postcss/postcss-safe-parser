@@ -30,7 +30,6 @@ gulp.task('build:package', ['clean'], () => {
             p.main = 'lib/safe-parse';
             p.devDependencies['babel-core'] = p.dependencies['babel-core'];
             delete p.dependencies['babel-core'];
-            delete p.scripts.postinstall;
             return p;
         }))
         .pipe(gulp.dest('build'));
