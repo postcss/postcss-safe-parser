@@ -24,17 +24,17 @@ export default function safeTokenize(input) {
     let css    = input.css.valueOf();
 
     let code, next, quote, lines, last, content, escape,
-        nextLine, nextOffset, escaped, escapePos;
+        nextLine, nextOffset, escaped, escapePos, prev, n;
 
     let length = css.length;
     let offset = -1;
     let line   =  1;
     let pos    =  0;
 
-    let fixUnclosed = function (what, end) {
+    function fixUnclosed(what, end) {
         css += end;
         next = css.length - 1;
-    };
+    }
 
     while ( pos < length ) {
         code = css.charCodeAt(pos);
@@ -85,17 +85,40 @@ export default function safeTokenize(input) {
             break;
 
         case OPEN_PARENTHESES:
-            next    = css.indexOf(')', pos + 1);
-            content = css.slice(pos, next + 1);
+            prev = tokens.length ? tokens[tokens.length - 1][1] : '';
+            n    = css.charCodeAt(pos + 1);
+            if ( prev === 'url' && n !== SINGLE_QUOTE && n !== DOUBLE_QUOTE ) {
+                next = pos;
+                do {
+                    escaped = false;
+                    next    = css.indexOf(')', next + 1);
+                    if ( next === -1 ) fixUnclosed('bracket', ')');
+                    escapePos = next;
+                    while ( css.charCodeAt(escapePos - 1) === BACKSLASH ) {
+                        escapePos -= 1;
+                        escaped = !escaped;
+                    }
+                } while ( escaped );
 
-            if ( next === -1 || RE_BAD_BRACKET.test(content) ) {
-                tokens.push(['(', '(', line, pos - offset]);
-            } else {
-                tokens.push(['brackets', content,
+                tokens.push(['brackets', css.slice(pos, next + 1),
                     line, pos  - offset,
                     line, next - offset
                 ]);
                 pos = next;
+
+            } else {
+                next    = css.indexOf(')', pos + 1);
+                content = css.slice(pos, next + 1);
+
+                if ( next === -1 || RE_BAD_BRACKET.test(content) ) {
+                    tokens.push(['(', '(', line, pos - offset]);
+                } else {
+                    tokens.push(['brackets', content,
+                        line, pos  - offset,
+                        line, next - offset
+                    ]);
+                    pos = next;
+                }
             }
 
             break;
