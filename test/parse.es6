@@ -24,7 +24,7 @@ describe('Safe Parser', () => {
     it('fixes unnecessary block close in safe mode', () => {
         let root = parse('a {\n} }');
         expect(root.first.toString()).to.eql('a {\n}');
-        expect(root.raw.after).to.eql(' }');
+        expect(root.raws.after).to.eql(' }');
     });
 
     it('fixes unclosed comment in safe mode', () => {
@@ -38,21 +38,21 @@ describe('Safe Parser', () => {
     });
 
     it('fixes unclosed bracket', () => {
-        expect(parse(':not(one() { }').raw.after).to.eql(':not(one() { }');
+        expect(parse(':not(one() { }').raws.after).to.eql(':not(one() { }');
     });
 
     it('fixes property without value in safe mode', () => {
         let root = parse('a { color: white; one }');
         expect(root.first.nodes.length).to.eql(1);
-        expect(root.first.raw.semicolon).to.be.true;
-        expect(root.first.raw.after).to.eql(' one ');
+        expect(root.first.raws.semicolon).to.be.true;
+        expect(root.first.raws.after).to.eql(' one ');
     });
 
     it('fixes 2 properties in safe mode', () => {
         let root = parse('a { one color: white; one }');
         expect(root.first.nodes.length).to.eql(1);
         expect(root.first.first.prop).to.eql('color');
-        expect(root.first.first.raw.before).to.eql(' one ');
+        expect(root.first.first.raws.before).to.eql(' one ');
     });
 
     it('fixes nameless at-rule in safe mode', () => {

@@ -10,8 +10,8 @@ export default class SafeParser extends Parser {
 
     unknownDecl(node, token) {
         node.source.start = { line: token[2], column: token[3] };
-        node.raw.before += node.prop + node.raw.between;
-        node.raw.between = '';
+        node.raws.before += node.prop + node.raws.between;
+        node.raws.between = '';
         node.prop = token[1];
     }
 
@@ -23,7 +23,7 @@ export default class SafeParser extends Parser {
     }
 
     unexpectedClose() {
-        this.current.raw.after += '}';
+        this.current.raws.after += '}';
     }
 
     unclosedBlock() { }
