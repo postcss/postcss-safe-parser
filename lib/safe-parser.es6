@@ -8,13 +8,6 @@ export default class SafeParser extends Parser {
         this.tokens = safeTokenizer(this.input);
     }
 
-    unknownDecl(node, token) {
-        node.source.start = { line: token[2], column: token[3] };
-        node.raws.before += node.prop + node.raws.between;
-        node.raws.between = '';
-        node.prop = token[1];
-    }
-
     unclosedBracket() { }
 
     unknownWord(start) {
@@ -25,8 +18,6 @@ export default class SafeParser extends Parser {
     unexpectedClose() {
         this.current.raws.after += '}';
     }
-
-    unclosedBlock() { }
 
     doubleColon() { }
 
@@ -53,5 +44,17 @@ export default class SafeParser extends Parser {
     }
 
     checkMissedSemicolon() { }
+
+    endFile() {
+        if ( this.current.nodes && this.current.nodes.length ) {
+            this.current.raws.semicolon = this.semicolon;
+        }
+        this.current.raws.after = (this.current.raws.after || '') + this.spaces;
+
+        while ( this.current.parent ) {
+            this.current = this.current.parent;
+            this.current.raws.after = '';
+        }
+    }
 
 }

@@ -49,10 +49,10 @@ describe('Safe Parser', () => {
     });
 
     it('fixes 2 properties in safe mode', () => {
-        let root = parse('a { one color: white; one }');
+        let root = parse('a { color one: white; one }');
         expect(root.first.nodes.length).to.eql(1);
         expect(root.first.first.prop).to.eql('color');
-        expect(root.first.first.raws.before).to.eql(' one ');
+        expect(root.first.first.raws.between).to.eql(' one: ');
     });
 
     it('fixes nameless at-rule in safe mode', () => {
