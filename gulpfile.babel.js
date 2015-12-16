@@ -66,4 +66,4 @@ gulp.task('integration', (done) => {
 
 // Common
 
-gulp.task('default', ['lint', 'test']);
+gulp.task('default', ['lint', 'test', 'integration']);
