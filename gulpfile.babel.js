@@ -28,8 +28,12 @@ gulp.task('build:package', ['clean'], () => {
     gulp.src('./package.json')
         .pipe(editor( (p) => {
             p.main = 'lib/safe-parse';
-            p.devDependencies['babel-core'] = p.dependencies['babel-core'];
-            delete p.dependencies['babel-core'];
+            Object.keys(p.dependencies).forEach( (dep) => {
+                if (/^babel-/.test(dep)) {
+                    p.devDependencies[dep] = p.dependencies[dep];
+                    delete p.dependencies[dep];
+                }
+            });
             return p;
         }))
         .pipe(gulp.dest('build'));
