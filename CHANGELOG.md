@@ -1,3 +1,6 @@
+## 1.0.4
+* Fix wrong `main` in `package.json`.
+
 ## 1.0.3
 * Remove Babel from dependencies (by Jonny Buchanan).
 
