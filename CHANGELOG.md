@@ -1,3 +1,6 @@
+## 1.0.3
+* Remove Babel from dependencies (by Jonny Buchanan).
+
 ## 1.0.2
 * Clean code for PostCSS 5.0.13 internal changes.
 * Use Babel 6.
