@@ -33,7 +33,7 @@ gulp.task('build:package', ['clean'], () => {
     ];
     return gulp.src('./package.json')
         .pipe(editor( (json) => {
-            json.main = 'lib/postcss';
+            json.main = 'lib/safe-parse';
             for ( let i of builders ) {
                 json.devDependencies[i] = json.dependencies[i];
                 delete json.dependencies[i];
