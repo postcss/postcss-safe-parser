@@ -25,16 +25,20 @@ gulp.task('build:docs', ['clean'], () => {
 
 gulp.task('build:package', ['clean'], () => {
     let editor = require('gulp-json-editor');
-    gulp.src('./package.json')
-        .pipe(editor( (p) => {
-            p.main = 'lib/safe-parse';
-            Object.keys(p.dependencies).forEach( (dep) => {
-                if (/^babel-/.test(dep)) {
-                    p.devDependencies[dep] = p.dependencies[dep];
-                    delete p.dependencies[dep];
-                }
-            });
-            return p;
+    let builders = [
+        'babel-plugin-add-module-exports',
+        'babel-preset-es2015-loose',
+        'babel-preset-stage-0',
+        'babel-core'
+    ];
+    return gulp.src('./package.json')
+        .pipe(editor( (json) => {
+            json.main = 'lib/postcss';
+            for ( let i of builders ) {
+                json.devDependencies[i] = json.dependencies[i];
+                delete json.dependencies[i];
+            }
+            return json;
         }))
         .pipe(gulp.dest('build'));
 });
