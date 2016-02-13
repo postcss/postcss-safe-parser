@@ -32,7 +32,7 @@ gulp.task('build:package', ['clean'], () => {
         'babel-core'
     ];
     return gulp.src('./package.json')
-        .pipe(editor( (json) => {
+        .pipe(editor( json => {
             json.main = 'lib/safe-parse';
             for ( let i of builders ) {
                 json.devDependencies[i] = json.dependencies[i];
@@ -63,11 +63,11 @@ gulp.task('test', () => {
     return gulp.src('test/*.es6', { read: false }).pipe(mocha());
 });
 
-gulp.task('integration', (done) => {
+gulp.task('integration', done => {
     require('babel-core/register')({ extensions: ['.es6'], ignore: false });
     let real = require('postcss-parser-tests/real');
     let safe = require('./');
-    real(done, [['Browserhacks', 'http://browserhacks.com/']], (css) => {
+    real(done, [['Browserhacks', 'http://browserhacks.com/']], css => {
         return safe(css).toResult({ map: { annotation: false } });
     });
 });
