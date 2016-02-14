@@ -1,6 +1,6 @@
 {
   "name": "postcss-safe-parser",
-  "version": "1.0.5",
+  "version": "1.0.6",
   "description": "Fault-tolerant CSS parser for PostCSS",
   "keywords": [
     "css",

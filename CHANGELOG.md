@@ -1,3 +1,6 @@
+## 1.0.6
+* Fix package dependencies.
+
 ## 1.0.5
 * Fix CSS syntax error position on unclosed quotes.
 
