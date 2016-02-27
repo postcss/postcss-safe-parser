@@ -16,8 +16,8 @@ const ASTERICK          =  '*'.charCodeAt(0);
 const COLON             =  ':'.charCodeAt(0);
 const AT                =  '@'.charCodeAt(0);
 
-const RE_AT_END      = /[ \n\t\r\{\(\)'"\\;/]/g;
-const RE_WORD_END    = /[ \n\t\r\(\)\{\}:;@!'"\\]|\/(?=\*)/g;
+const RE_AT_END      = /[ \n\t\r\f\{\(\)'"\\;/]/g;
+const RE_WORD_END    = /[ \n\t\r\f\(\)\{\}:;@!'"\\]|\/(?=\*)/g;
 const RE_BAD_BRACKET = /.[\\\/\("'\n]/;
 
 export default function safeTokenize(input) {
@@ -40,7 +40,8 @@ export default function safeTokenize(input) {
     while ( pos < length ) {
         code = css.charCodeAt(pos);
 
-        if ( code === NEWLINE ) {
+        if ( code === NEWLINE || code === FEED ||
+             code === CR && css.charCodeAt(pos + 1) !== NEWLINE ) {
             offset = pos;
             line  += 1;
         }
