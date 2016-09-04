@@ -7,45 +7,44 @@ gulp.task('clean', () => {
 
 // Build
 
-gulp.task('build:lib', ['clean'], () => {
-    let babel = require('gulp-babel');
+gulp.task('compile', () => {
+    let sourcemaps = require('gulp-sourcemaps');
+    let changed    = require('gulp-changed');
+    let babel      = require('gulp-babel');
     return gulp.src('lib/*.es6')
+        .pipe(changed('lib', { extension: '.js' }))
+        .pipe(sourcemaps.init())
         .pipe(babel())
-        .pipe(gulp.dest('build/lib'));
+        .pipe(sourcemaps.write())
+        .pipe(gulp.dest('lib'));
 });
 
-gulp.task('build:docs', ['clean'], () => {
+gulp.task('build:lib', ['compile'], () => {
+    return gulp.src('lib/*.js').pipe(gulp.dest('build/lib'));
+});
+
+gulp.task('build:docs', () => {
     let ignore = require('fs').readFileSync('.npmignore').toString()
         .trim().split(/\n+/)
-        .concat(['.npmignore', 'package.json', 'index.js'])
+        .concat(['.npmignore'])
         .map( i => '!' + i );
     return gulp.src(['*'].concat(ignore))
         .pipe(gulp.dest('build'));
 });
 
-gulp.task('build:package', ['clean'], () => {
-    let editor = require('gulp-json-editor');
-    return gulp.src('./package.json')
-        .pipe(editor( json => {
-            json.main = 'lib/safe-parse';
-            for ( let i in json.dependencies ) {
-                if ( /^babel-/.test(i) ) {
-                    json.devDependencies[i] = json.dependencies[i];
-                    delete json.dependencies[i];
-                }
-            }
-            return json;
-        }))
-        .pipe(gulp.dest('build'));
+gulp.task('build', (done) => {
+    let runSequence = require('run-sequence');
+    runSequence('clean', ['build:lib', 'build:docs'], done);
 });
-
-gulp.task('build', ['build:lib', 'build:docs', 'build:package']);
 
 // Lint
 
 gulp.task('lint', () => {
+    if ( parseInt(process.versions.node) < 4 ) {
+        return false;
+    }
     let eslint = require('gulp-eslint');
-    return gulp.src(['*.js', 'lib/*.es6', 'test/*.es6'])
+    return gulp.src(['*.js', 'lib/*.es6', 'test/*.js'])
         .pipe(eslint())
         .pipe(eslint.format())
         .pipe(eslint.failAfterError());
@@ -53,16 +52,14 @@ gulp.task('lint', () => {
 
 // Test
 
-gulp.task('test', () => {
-    require('babel-core/register')({ extensions: ['.es6'], ignore: false });
-    let mocha = require('gulp-mocha');
-    return gulp.src('test/*.es6', { read: false }).pipe(mocha());
+gulp.task('test', ['compile'], () => {
+    let ava = require('gulp-ava');
+    return gulp.src('test/*.js', { read: false }).pipe(ava());
 });
 
-gulp.task('integration', done => {
-    require('babel-core/register')({ extensions: ['.es6'], ignore: false });
+gulp.task('integration', ['build'], done => {
     let real = require('postcss-parser-tests/real');
-    let safe = require('./');
+    let safe = require('./build');
     real(done, [['Browserhacks', 'http://browserhacks.com/']], css => {
         return safe(css).toResult({ map: { annotation: false } });
     });
