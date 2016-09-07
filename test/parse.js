@@ -30,11 +30,11 @@ test('fixes unclosed comment in safe mode', t => {
 });
 
 test('fixes unclosed quote in safe mode', t => {
-    t.deepEqual(parse('a { content: "b').toString(), 'a { content: "b"}');
+    t.deepEqual(parse('a { content: "b').first.first.value, '"b');
 });
 
 test('fixes unclosed bracket', t => {
-    t.deepEqual(parse(':not(one() { }').raws.after, ':not(one() { }');
+    t.deepEqual(parse(':not(one() { }').toString(), ':not(one() { }');
 });
 
 test('fixes property without value in safe mode', t => {
