@@ -66,3 +66,8 @@ it('fixes double colon in safe mode', () => {
     var root = parse('a { one:: 1 }');
     expect(root.first.first.value).toEqual(': 1');
 });
+
+it('fixes colon instead of semicolon', () => {
+    var root = parse('a { one: 1: } b { one: 1 : }');
+    expect(root.toString()).toEqual('a { one: 1 } b { one: 1  }');
+});
