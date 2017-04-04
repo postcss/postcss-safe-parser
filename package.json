@@ -16,7 +16,6 @@
     "postcss": "^5.2.16"
   },
   "devDependencies": {
-    "ava": "^0.18.0",
     "babel-core": "^6.24.0",
     "babel-eslint": "^7.2.1",
     "babel-plugin-add-module-exports": "^0.2.1",
@@ -26,11 +25,12 @@
     "eslint": "^3.19.0",
     "eslint-config-postcss": "^2.0.2",
     "gulp": "^3.9.1",
-    "gulp-ava": "^0.16.0",
     "gulp-babel": "^6.1.2",
     "gulp-changed": "^2.0.0",
     "gulp-eslint": "^3.0.1",
+    "gulp-jest": "^1.0.0",
     "gulp-sourcemaps": "^2.5.1",
+    "jest": "^19.0.2",
     "lint-staged": "^3.4.0",
     "postcss-parser-tests": "^5.0.11",
     "pre-commit": "^1.1.3",
