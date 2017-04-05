@@ -1,3 +1,6 @@
+## 2.0.1
+* Do not fall on colon instead of semicolon in the declaration end.
+
 ## 2.0
 * Use PostCSS 5.2 core tokenizer.
 
