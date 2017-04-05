@@ -1,3 +1,6 @@
+# Change Log
+This project adheres to [Semantic Versioning](http://semver.org/).
+
 ## 2.0.1
 * Do not fall on colon instead of semicolon in the declaration end.
 
@@ -27,5 +30,4 @@
 * Fix `url()` parsing.
 
 ## 1.0
-
 * Initial release from PostCSS sources.
