@@ -40,6 +40,37 @@
     "lint-staged": "lint-staged",
     "test": "gulp"
   },
+  "eslintConfig": {
+    "parser": "babel-eslint",
+    "extends": "eslint-config-postcss",
+    "rules": {
+      "key-spacing": [
+        "error",
+        {
+          "align": "value"
+        }
+      ],
+      "complexity": "off",
+      "no-var": "off"
+    },
+    "env": {
+      "jest": true
+    }
+  },
+  "babel": {
+    "presets": [
+      [
+        "es2015",
+        {
+          "loose": true
+        }
+      ]
+    ],
+    "plugins": [
+      "add-module-exports",
+      "precompile-charcodes"
+    ]
+  },
   "main": "lib/safe-parse",
   "lint-staged": {
     "test/*.js": "eslint",
