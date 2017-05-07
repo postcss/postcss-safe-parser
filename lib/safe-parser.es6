@@ -1,11 +1,11 @@
-import tokenize from 'postcss/lib/tokenize';
-import Comment  from 'postcss/lib/comment';
-import Parser   from 'postcss/lib/parser';
+import tokenizer from 'postcss/lib/tokenize';
+import Comment   from 'postcss/lib/comment';
+import Parser    from 'postcss/lib/parser';
 
 export default class SafeParser extends Parser {
 
-    tokenize() {
-        this.tokens = tokenize(this.input, { ignoreErrors: true });
+    createTokenizer() {
+        this.tokenizer = tokenizer(this.input, { ignoreErrors: true });
     }
 
     comment(token) {
@@ -36,9 +36,8 @@ export default class SafeParser extends Parser {
 
     unclosedBracket() { }
 
-    unknownWord(start) {
-        let buffer   = this.tokens.slice(start, this.pos + 1);
-        this.spaces += buffer.map( i => i[1] ).join('');
+    unknownWord(tokens) {
+        this.spaces += tokens.map(i => i[1]).join('');
     }
 
     unexpectedClose() {
