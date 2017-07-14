@@ -29,7 +29,7 @@ export default class SafeParser extends Parser {
     }
 
     decl(tokens) {
-        if ( tokens.length > 1 || tokens[0][0] !== ':' ) {
+        if ( tokens.length > 1 ) {
             super.decl(tokens);
         }
     }

@@ -62,6 +62,10 @@ it('fixes property without semicolon in safe mode', () => {
     expect(root.toString()).toEqual('a { one: 1; two: 2 }');
 });
 
+it('does not fall on missed semicolon in IE filter', () => {
+    parse('a { one: two: progid:DX(a=\'1\', b=\'2\'); }');
+});
+
 it('fixes double colon in safe mode', () => {
     var root = parse('a { one:: 1 }');
     expect(root.first.first.value).toEqual(': 1');
