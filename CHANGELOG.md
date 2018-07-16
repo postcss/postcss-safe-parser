@@ -1,6 +1,9 @@
 # Change Log
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## 4.0.1
+* Remove development file from npm package.
+
 ## 4.0
 * Remove Node.js 9 and Node.js 4 support.
 * Remove IE and “dead” browsers from Babel.
