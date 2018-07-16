@@ -1,12 +1,12 @@
-import Input from 'postcss/lib/input';
+const Input = require('postcss/lib/input')
 
-import SafeParser from './safe-parser';
+const SafeParser = require('./safe-parser')
 
-export default function safeParse(css, opts) {
-    let input = new Input(css, opts);
+module.exports = function safeParse (css, opts) {
+  const input = new Input(css, opts)
 
-    let parser = new SafeParser(input);
-    parser.parse();
+  const parser = new SafeParser(input)
+  parser.parse()
 
-    return parser.root;
+  return parser.root
 }

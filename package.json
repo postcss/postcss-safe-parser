@@ -12,6 +12,9 @@
   "author": "Andrey Sitnik <andrey@sitnik.ru>",
   "license": "MIT",
   "repository": "postcss/postcss-safe-parser",
+  "engines": {
+    "node": ">=6.0.0"
+  },
   "dependencies": {
     "postcss": "^7.0.0"
   },
@@ -23,7 +26,15 @@
     "babel-preset-env": "^1.7.0",
     "del": "^3.0.0",
     "eslint": "^5.1.0",
-    "eslint-config-postcss": "^2.0.2",
+    "eslint-config-logux": "^23.0.2",
+    "eslint-config-postcss": "^3.0.2",
+    "eslint-config-standard": "^11.0.0",
+    "eslint-plugin-import": "^2.13.0",
+    "eslint-plugin-jest": "^21.17.0",
+    "eslint-plugin-node": "^6.0.1",
+    "eslint-plugin-promise": "^3.8.0",
+    "eslint-plugin-security": "^1.4.0",
+    "eslint-plugin-standard": "^3.1.0",
     "gulp": "^3.9.1",
     "gulp-babel": "^7.0.1",
     "gulp-changed": "^3.2.0",
@@ -44,19 +55,17 @@
   "eslintConfig": {
     "parser": "babel-eslint",
     "extends": "eslint-config-postcss",
-    "rules": {
-      "key-spacing": [
-        "error",
-        {
-          "align": "value"
+    "overrides": [
+      {
+        "files": [
+          "gulpfile.js"
+        ],
+        "rules": {
+          "node/no-unpublished-require": "off",
+          "global-require": "off"
         }
-      ],
-      "complexity": "off",
-      "no-var": "off"
-    },
-    "env": {
-      "jest": true
-    }
+      }
+    ]
   },
   "jest": {
     "testEnvironment": "node",
