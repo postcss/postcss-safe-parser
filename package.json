@@ -58,6 +58,12 @@
       "jest": true
     }
   },
+  "jest": {
+    "testEnvironment": "node",
+    "modulePathIgnorePatterns": [
+      "<rootDir>/build"
+    ]
+  },
   "babel": {
     "presets": [
       [
