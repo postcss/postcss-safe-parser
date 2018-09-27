@@ -1,6 +1,6 @@
-const tokenizer = require('postcss/lib/tokenize')
-const Comment = require('postcss/lib/comment')
-const Parser = require('postcss/lib/parser')
+let tokenizer = require('postcss/lib/tokenize')
+let Comment = require('postcss/lib/comment')
+let Parser = require('postcss/lib/parser')
 
 class SafeParser extends Parser {
   createTokenizer () {
@@ -8,7 +8,7 @@ class SafeParser extends Parser {
   }
 
   comment (token) {
-    const node = new Comment()
+    let node = new Comment()
     this.init(node, token[2], token[3])
     node.source.end = { line: token[4], column: token[5] }
 
@@ -20,7 +20,7 @@ class SafeParser extends Parser {
       node.raws.left = text
       node.raws.right = ''
     } else {
-      const match = text.match(/^(\s*)([^]*[^\s])(\s*)$/)
+      let match = text.match(/^(\s*)([^]*[^\s])(\s*)$/)
       node.text = match[2]
       node.raws.left = match[1]
       node.raws.right = match[3]
@@ -50,7 +50,7 @@ class SafeParser extends Parser {
   }
 
   precheckMissedSemicolon (tokens) {
-    const colon = this.colon(tokens)
+    let colon = this.colon(tokens)
     if (colon === false) return
 
     let split
@@ -63,7 +63,7 @@ class SafeParser extends Parser {
         break
       }
     }
-    const other = tokens.splice(split, tokens.length - split)
+    let other = tokens.splice(split, tokens.length - split)
     this.decl(other)
   }
 
