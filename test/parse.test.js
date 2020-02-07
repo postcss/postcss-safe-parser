@@ -30,6 +30,10 @@ it('fixes unclosed comment in safe mode', () => {
   expect(root.first.first.text).toEqual('b')
 })
 
+it('fixes column and semicolumn case', () => {
+  expect(parse('a{:;}').toString()).toEqual('a{}')
+})
+
 it('fixes unclosed quote in safe mode', () => {
   expect(parse('a { content: "b').first.first.value).toEqual('"b')
 })
