@@ -1,10 +1,5 @@
 let gulp = require('gulp')
 
-gulp.task('clean', () => {
-  let del = require('del')
-  return del(['build/', 'lib/*.js'])
-})
-
 // Build
 gulp.task('compile', () => {
   let sourcemaps = require('gulp-sourcemaps')
@@ -31,10 +26,7 @@ gulp.task('build:docs', () => {
     .pipe(gulp.dest('build'))
 })
 
-gulp.task('build', done => {
-  let runSequence = require('run-sequence')
-  runSequence('clean', ['build:lib', 'build:docs'], done)
-})
+gulp.task('build', ['build:lib', 'build:docs'])
 
 // Test
 
