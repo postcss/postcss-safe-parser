@@ -1,6 +1,5 @@
 let gulp = require('gulp')
 
-// Build
 gulp.task('compile', () => {
   let sourcemaps = require('gulp-sourcemaps')
   let changed = require('gulp-changed')
@@ -27,10 +26,3 @@ gulp.task('build:docs', () => {
 })
 
 gulp.task('build', ['build:lib', 'build:docs'])
-
-// Test
-
-gulp.task('test', ['compile'], () => {
-  let jest = require('gulp-jest').default
-  return gulp.src('test/').pipe(jest())
-})
