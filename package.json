@@ -11,7 +11,8 @@
   ],
   "scripts": {
     "clean": "del-cli build/ lib/*.js",
-    "test": "yarn clean && gulp build && eslint-ci . && jest && ./test/integration.js"
+    "build": "yarn clean && gulp build",
+    "test": "gulp build && eslint-ci . && jest && ./test/integration.js"
   },
   "author": "Andrey Sitnik <andrey@sitnik.ru>",
   "license": "MIT",
