@@ -2,10 +2,8 @@ let gulp = require('gulp')
 
 gulp.task('compile', () => {
   let sourcemaps = require('gulp-sourcemaps')
-  let changed = require('gulp-changed')
   let babel = require('gulp-babel')
   return gulp.src('lib/*.es6')
-    .pipe(changed('lib', { extension: '.js' }))
     .pipe(sourcemaps.init())
     .pipe(babel())
     .pipe(sourcemaps.write())
