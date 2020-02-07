@@ -12,9 +12,9 @@ gulp.task('compile', () => {
     .pipe(gulp.dest('lib'))
 })
 
-gulp.task('build:lib', ['compile'], () => {
+gulp.task('build:lib', gulp.series('compile', () => {
   return gulp.src('lib/*.js').pipe(gulp.dest('build/lib'))
-})
+}))
 
 gulp.task('build:docs', () => {
   let ignore = require('fs').readFileSync('.npmignore').toString()
@@ -25,4 +25,4 @@ gulp.task('build:docs', () => {
     .pipe(gulp.dest('build'))
 })
 
-gulp.task('build', ['build:lib', 'build:docs'])
+gulp.task('build', gulp.parallel('build:lib', 'build:docs'))

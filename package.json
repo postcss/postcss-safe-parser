@@ -20,14 +20,13 @@
     "node": ">=6.0.0"
   },
   "dependencies": {
-    "postcss": "^7.0.4"
+    "postcss": "^7.0.26"
   },
   "devDependencies": {
+    "@babel/core": "^7.8.4",
+    "@babel/preset-env": "^7.8.4",
     "@logux/eslint-config": "^35.0.4",
-    "babel-core": "^6.26.3",
-    "babel-plugin-add-module-exports": "^0.2.1",
-    "babel-plugin-precompile-charcodes": "^1.1.0",
-    "babel-preset-env": "^1.7.0",
+    "babel-plugin-add-module-exports": "^1.0.2",
     "del-cli": "^3.0.0",
     "eslint": "^6.8.0",
     "eslint-config-standard": "^14.1.0",
@@ -40,10 +39,10 @@
     "eslint-plugin-security": "^1.4.0",
     "eslint-plugin-standard": "^4.0.1",
     "eslint-plugin-unicorn": "^16.0.0",
-    "gulp": "^3.9.1",
-    "gulp-babel": "^7.0.1",
-    "gulp-changed": "^3.2.0",
-    "gulp-sourcemaps": "^2.6.4",
+    "gulp": "^4.0.2",
+    "gulp-babel": "^8.0.0",
+    "gulp-changed": "^4.0.2",
+    "gulp-sourcemaps": "^2.6.5",
     "husky": "^4.2.1",
     "jest": "^25.1.0",
     "lint-staged": "^10.0.7",
@@ -64,6 +63,10 @@
       }
     ]
   },
+  "eslintIgnore": [
+    "build/",
+    "lib/*.js"
+  ],
   "jest": {
     "testEnvironment": "node",
     "modulePathIgnorePatterns": [
@@ -73,24 +76,14 @@
   "babel": {
     "presets": [
       [
-        "env",
+        "@babel/env",
         {
-          "targets": {
-            "browsers": [
-              "last 2 version",
-              "not dead",
-              "not Explorer 11",
-              "not ExplorerMobile 11"
-            ],
-            "node": 6
-          },
           "loose": true
         }
       ]
     ],
     "plugins": [
-      "add-module-exports",
-      "precompile-charcodes"
+      "add-module-exports"
     ]
   },
   "main": "lib/safe-parse",
@@ -100,6 +93,7 @@
     }
   },
   "lint-staged": {
+    "gulpfile.js": "eslint",
     "test/*.js": "eslint",
     "lib/*.es6": "eslint"
   }
