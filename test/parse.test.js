@@ -39,7 +39,7 @@ it('fixes unclosed bracket', () => {
 it('fixes property without value in safe mode', () => {
   let root = parse('a { color: white; one }')
   expect(root.first.nodes).toHaveLength(1)
-  expect(root.first.raws.semicolon).toBeTruthy()
+  expect(root.first.raws.semicolon).toBe(true)
   expect(root.first.raws.after).toEqual(' one ')
 })
 

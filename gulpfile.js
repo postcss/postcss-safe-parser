@@ -36,16 +36,6 @@ gulp.task('build', done => {
   runSequence('clean', ['build:lib', 'build:docs'], done)
 })
 
-// Lint
-
-gulp.task('lint', ['build'], () => {
-  let eslint = require('gulp-eslint')
-  return gulp.src(['*.js', 'lib/*.es6', 'test/*.js'])
-    .pipe(eslint())
-    .pipe(eslint.format())
-    .pipe(eslint.failAfterError())
-})
-
 // Test
 
 gulp.task('test', ['compile'], () => {
