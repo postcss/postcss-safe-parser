@@ -1,19 +1,20 @@
-let cases = require('postcss-parser-tests')
+let { eachTest, jsonify } = require('postcss-parser-tests')
 
 let parse = require('../lib/safe-parse')
 
-cases.each((name, css, json) => {
+eachTest((name, css, json) => {
   if (name !== 'apply.css' && name !== 'custom-properties.css') {
     it('parses ' + name, () => {
-      let parsed = cases.jsonify(parse(css, { from: name }))
+      let parsed = jsonify(parse(css, { from: name }))
       expect(parsed).toEqual(json)
     })
   }
 })
 
 it('fixes unclosed blocks in safe mode', () => {
-  expect(parse('@media (screen) { a {\n').toString())
-    .toEqual('@media (screen) { a {\n}}')
+  expect(parse('@media (screen) { a {\n').toString()).toEqual(
+    '@media (screen) { a {\n}}'
+  )
   expect(parse('a { color').toString()).toEqual('a { color}')
   expect(parse('a { color: black').first.first.prop).toEqual('color')
 })
@@ -70,7 +71,7 @@ it('fixes property without semicolon in safe mode', () => {
 
 it('does not fall on missed semicolon in IE filter', () => {
   expect(() => {
-    parse('a { one: two: progid:DX(a=\'1\', b=\'2\'); }')
+    parse("a { one: two: progid:DX(a='1', b='2'); }")
   }).not.toThrow()
 })
 
