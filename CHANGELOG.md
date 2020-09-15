@@ -3,7 +3,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ## 5.0
 * Removed support for Node.js 6.x, 8.x, 11.x, and 13.x versions.
-* Used PostCSS 8.0.
+* Moved to PostCSS 8.0.
 
 ## 4.0.2
 * Fix parsing `:;`.
