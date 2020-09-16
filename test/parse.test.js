@@ -82,5 +82,5 @@ it('fixes double colon in safe mode', () => {
 
 it('fixes colon instead of semicolon', () => {
   let root = parse('a { one: 1: } b { one: 1 : }')
-  expect(root.toString()).toEqual('a { one: 1 } b { one: 1  }')
+  expect(root.toString()).toEqual('a { one: 1: } b { one: 1 : }')
 })
