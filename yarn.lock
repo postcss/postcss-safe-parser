@@ -4393,10 +4393,10 @@ postcss-selector-parser@2.2.3:
     indexes-of "^1.0.1"
     uniq "^1.0.1"
 
-postcss-sharec-config@^0.1.6:
-  version "0.1.6"
-  resolved "https://registry.yarnpkg.com/postcss-sharec-config/-/postcss-sharec-config-0.1.6.tgz#57fb193df4fb37f427b1915e1073a852bd814b72"
-  integrity sha512-ot377ES4pn9ZK5DRQp9XaViCjzETd8bf1QzLv6KZKn0Bm1ANUq5x1bZ3DxzvXw/6QSlK3i1NxIeL2y31aN/bRQ==
+postcss-sharec-config@^0.1.8:
+  version "0.1.8"
+  resolved "https://registry.yarnpkg.com/postcss-sharec-config/-/postcss-sharec-config-0.1.8.tgz#18afd3d8434fe4708f49775016bfd802152a265b"
+  integrity sha512-WuvDVkpjTbhNswa6jCtu8079crzGhFGYiVQk4XhzQPS8FiE2eWbPnHAoUqSNMNX2wMzfyhB+KHokKlZCX5HO0A==
   dependencies:
     sharec "^2.3.0"
 
@@ -4418,10 +4418,10 @@ postcss@^7.0.14, postcss@^7.0.6:
     source-map "^0.6.1"
     supports-color "^6.1.0"
 
-postcss@^8.0.4:
-  version "8.0.4"
-  resolved "https://registry.yarnpkg.com/postcss/-/postcss-8.0.4.tgz#c2ce10272c83cb86083c59725ba673e445f6bc88"
-  integrity sha512-1XnscHU1hafSVykema78TOeBf1my7WThfK2jaSDtOQW90CAny63oEsWVC+EN/WSMSBpghq5PxUdPgozK693tJw==
+postcss@^8.1.0:
+  version "8.1.0"
+  resolved "https://registry.yarnpkg.com/postcss/-/postcss-8.1.0.tgz#1be330c7f6971d49726059b9f51785f45273fa70"
+  integrity sha512-d3RppIo1DI66oHxA1vdckr5qciQbMIrHvyzuvp2cLJHOLwJHg7X9ncrfw2Ri6Sgiwv/GoXtOwEHJ9E9VSRxXWQ==
   dependencies:
     colorette "^1.2.1"
     line-column "^1.0.2"
