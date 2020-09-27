@@ -46,7 +46,7 @@
     "jest": "^26.4.2",
     "jest-ci": "^0.1.1",
     "lint-staged": "^10.4.0",
-    "postcss-parser-tests": "^8.3.0",
+    "postcss-parser-tests": "^8.3.1",
     "postcss-sharec-config": "^0.1.8"
   },
   "husky": {
