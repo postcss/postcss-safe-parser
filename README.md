@@ -16,7 +16,8 @@ capable of parsing any input. It is useful for:
 [PostCSS]:           https://github.com/postcss/postcss
 
 <a href="https://evilmartians.com/?utm_source=postcss">
-  <img src="https://evilmartians.com/badges/sponsored-by-evil-martians.svg" alt="Sponsored by Evil Martians" width="236" height="54">
+  <img src="https://evilmartians.com/badges/sponsored-by-evil-martians.svg"
+    alt="Sponsored by Evil Martians" width="236" height="54">
 </a>
 
 
