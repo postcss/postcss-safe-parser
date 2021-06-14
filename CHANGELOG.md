@@ -1,6 +1,10 @@
 # Change Log
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## 6.0
+* Removed Node.js 10 support.
+* Moved `postcss` to `peerDependencies`.
+
 ## 5.0.2
 * Added funding links.
 
