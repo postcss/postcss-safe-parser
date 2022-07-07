@@ -1,86 +1,92 @@
 let { eachTest, jsonify } = require('postcss-parser-tests')
+let { equal, not } = require('uvu/assert')
+let { test } = require('uvu')
 
 let parse = require('../lib/safe-parse')
 
 eachTest((name, css, json) => {
   if (name !== 'apply.css' && name !== 'custom-properties.css') {
-    it('parses ' + name, () => {
+    test('parses ' + name, () => {
       let parsed = jsonify(parse(css, { from: name }))
-      expect(parsed).toEqual(json)
+      equal(parsed, json)
     })
   }
 })
 
-it('fixes unclosed blocks in safe mode', () => {
-  expect(parse('@media (screen) { a {\n').toString()).toBe(
+test('fixes unclosed blocks in safe mode', () => {
+  equal(
+    parse('@media (screen) { a {\n').toString(),
     '@media (screen) { a {\n}}'
   )
-  expect(parse('a { color').toString()).toBe('a { color}')
-  expect(parse('a { color: black').first.first.prop).toBe('color')
+  equal(parse('a { color').toString(), 'a { color}')
+  equal(parse('a { color: black').first.first.prop, 'color')
 })
 
-it('fixes unnecessary block close in safe mode', () => {
+test('fixes unnecessary block close in safe mode', () => {
   let root = parse('a {\n} }')
-  expect(root.first.toString()).toBe('a {\n}')
-  expect(root.raws.after).toBe(' }')
+  equal(root.first.toString(), 'a {\n}')
+  equal(root.raws.after, ' }')
 })
 
-it('fixes unclosed comment in safe mode', () => {
+test('fixes unclosed comment in safe mode', () => {
   let root = parse('a { /* b ')
-  expect(root.toString()).toBe('a { /* b */}')
-  expect(root.first.first.text).toBe('b')
+  equal(root.toString(), 'a { /* b */}')
+  equal(root.first.first.text, 'b')
 })
 
-it('fixes column and semicolumn case', () => {
-  expect(parse('a{:;}').toString()).toBe('a{}')
+test('fixes column and semicolumn case', () => {
+  equal(parse('a{:;}').toString(), 'a{}')
 })
 
-it('fixes unclosed quote in safe mode', () => {
-  expect(parse('a { content: "b').first.first.value).toBe('"b')
+test('fixes unclosed quote in safe mode', () => {
+  equal(parse('a { content: "b').first.first.value, '"b')
 })
 
-it('fixes unclosed bracket', () => {
-  expect(parse(':not(one() { }').toString()).toBe(':not(one() { }')
+test('fixes unclosed bracket', () => {
+  equal(parse(':not(one() { }').toString(), ':not(one() { }')
 })
 
-it('fixes property without value in safe mode', () => {
+test('fixes property without value in safe mode', () => {
   let root = parse('a { color: white; one }')
-  expect(root.first.nodes).toHaveLength(1)
-  expect(root.first.raws.semicolon).toBe(true)
-  expect(root.first.raws.after).toBe(' one ')
+  equal(root.first.nodes.length, 1)
+  equal(root.first.raws.semicolon, true)
+  equal(root.first.raws.after, ' one ')
 })
 
-it('fixes 2 properties in safe mode', () => {
+test('fixes 2 properties in safe mode', () => {
   let root = parse('a { color one: white; one }')
-  expect(root.first.nodes).toHaveLength(1)
-  expect(root.first.first.prop).toBe('color')
-  expect(root.first.first.raws.between).toBe(' one: ')
+  equal(root.first.nodes.length, 1)
+  equal(root.first.first.prop, 'color')
+  equal(root.first.first.raws.between, ' one: ')
 })
 
-it('fixes nameless at-rule in safe mode', () => {
+test('fixes nameless at-rule in safe mode', () => {
   let root = parse('@')
-  expect(root.first.type).toBe('atrule')
-  expect(root.first.name).toBe('')
+  equal(root.first.type, 'atrule')
+  equal(root.first.name, '')
 })
 
-it('fixes property without semicolon in safe mode', () => {
+test('fixes property without semicolon in safe mode', () => {
   let root = parse('a { one: 1 two: 2 }')
-  expect(root.first.nodes).toHaveLength(2)
-  expect(root.toString()).toBe('a { one: 1; two: 2 }')
+  equal(root.first.nodes.length, 2)
+  equal(root.toString(), 'a { one: 1; two: 2 }')
 })
 
-it('does not fall on missed semicolon in IE filter', () => {
-  expect(() => {
+test('does not fall on missed semicolon in IE filter', () => {
+  not.throws(() => {
     parse("a { one: two: progid:DX(a='1', b='2'); }")
-  }).not.toThrow()
+  })
 })
 
-it('fixes double colon in safe mode', () => {
+test('fixes double colon in safe mode', () => {
   let root = parse('a { one:: 1 }')
-  expect(root.first.first.value).toBe(': 1')
+  equal(root.first.first.value, ': 1')
 })
 
-it('fixes colon instead of semicolon', () => {
+test('fixes colon instead of semicolon', () => {
   let root = parse('a { one: 1: } b { one: 1 : }')
-  expect(root.toString()).toBe('a { one: 1: } b { one: 1 : }')
+  equal(root.toString(), 'a { one: 1: } b { one: 1 : }')
 })
+
+test.run()
+
