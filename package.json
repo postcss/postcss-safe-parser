@@ -20,10 +20,16 @@
     "node": ">=12.0"
   },
   "main": "lib/safe-parse",
-  "funding": {
-    "type": "opencollective",
-    "url": "https://opencollective.com/postcss/"
-  },
+  "funding": [
+    {
+      "type": "opencollective",
+      "url": "https://opencollective.com/postcss/"
+    },
+    {
+      "type": "tidelift",
+      "url": "https://tidelift.com/funding/github/npm/postcss-safe-parser"
+    }
+  ],
   "peerDependencies": {
     "postcss": "^8.3.3"
   },
