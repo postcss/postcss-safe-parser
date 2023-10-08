@@ -1,6 +1,10 @@
 # Change Log
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## 7.0
+* Removed Node.js 16, 14, and 12 support.
+* Added `Root#source.end`.
+
 ## 6.0
 * Removed Node.js 10 support.
 * Moved `postcss` to `peerDependencies`.
