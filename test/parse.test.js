@@ -88,5 +88,38 @@ test('fixes colon instead of semicolon', () => {
   equal(root.toString(), 'a { one: 1: } b { one: 1 : }')
 })
 
+test('fixes {} error', () => {
+  let root = parse(`:root { --example-var: { "Version": { "Build": "10.30.7.350828.20230224122352", "Source": "10.30.7.350828.1", "Required": "10.30.7.307232"; }}}; @font-face { font-family: 'Calibri'; }`)
+  equal(root.toString(), `:root { --example-var: { "Version": { "Build": "10.30.7.350828.20230224122352", "Source": "10.30.7.350828.1", "Required": "10.30.7.307232"; }}}; @font-face { font-family: 'Calibri'; }`)
+})
+
+test('Rule at the start of tokens', () => {
+  let root = parse(`.start { font-size: 16px; }`);
+  equal(root.toString(), `.start { font-size: 16px; }`);
+});
+
+test('Complex nested structures with JSON-like properties', () => {
+  let root = parse(`:root { --complex: {"nested": {"key": "value"}, "array": [1, {"sub": "value"}]}; } @font-face { font-family: 'Calibri'; }`);
+  equal(root.toString(), `:root { --complex: {"nested": {"key": "value"}, "array": [1, {"sub": "value"}]}; } @font-face { font-family: 'Calibri'; }`);
+});
+
+test('Multiple rules with one JSON-like custom property', () => {
+  let root = parse(`
+      .class1 { margin: 10px; }
+      :root { --jsonProp: {"a": 1, "b": {"c": 3}}; }
+      .class2 { padding: 20px; }
+  `);
+  equal(root.toString(), `
+      .class1 { margin: 10px; }
+      :root { --jsonProp: {"a": 1, "b": {"c": 3}}; }
+      .class2 { padding: 20px; }
+  `);
+});
+
+test('Custom property at start without modifications', () => {
+  let root = parse(`--example: {"key": "value"}; .class { color: black; }`);
+  equal(root.toString(), `--example: {"key": "value"}; .class { color: black; }`);
+});
+
 test.run()
 
