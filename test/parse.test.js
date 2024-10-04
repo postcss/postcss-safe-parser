@@ -1,6 +1,6 @@
-let { eachTest, jsonify } = require('postcss-parser-tests')
 let { deepStrictEqual, equal } = require('node:assert')
 let { test } = require('node:test')
+let { eachTest, jsonify } = require('postcss-parser-tests')
 
 let parse = require('../lib/safe-parse')
 

@@ -41,17 +41,10 @@
     "postcss": "^8.4.31"
   },
   "devDependencies": {
-    "@logux/eslint-config": "^52.0.1",
-    "clean-publish": "^4.2.0",
-    "eslint": "^8.51.0",
-    "eslint-config-standard": "^17.1.0",
-    "eslint-plugin-import": "^2.28.1",
-    "eslint-plugin-n": "^16.1.0",
-    "eslint-plugin-node-import": "^1.0.4",
-    "eslint-plugin-perfectionist": "^2.1.0",
-    "eslint-plugin-prefer-let": "^3.0.1",
-    "eslint-plugin-promise": "^6.1.1",
-    "postcss": "^8.4.31",
+    "@logux/eslint-config": "^53.4.0",
+    "clean-publish": "^5.0.0",
+    "eslint": "^9.11.1",
+    "postcss": "^8.4.47",
     "postcss-parser-tests": "^8.8.0"
   },
   "prettier": {
@@ -61,17 +54,6 @@
     "semi": false,
     "singleQuote": true,
     "trailingComma": "none"
-  },
-  "eslintConfig": {
-    "extends": "@logux/eslint-config"
-  },
-  "jest": {
-    "testEnvironment": "node",
-    "coverageThreshold": {
-      "global": {
-        "statements": 100
-      }
-    }
   },
   "clean-publish": {
     "cleanDocs": true
