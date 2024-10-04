@@ -1,6 +1,6 @@
 let { eachTest, jsonify } = require('postcss-parser-tests')
-let { equal, not } = require('uvu/assert')
-let { test } = require('uvu')
+let { deepStrictEqual, equal } = require('node:assert')
+let { test } = require('node:test')
 
 let parse = require('../lib/safe-parse')
 
@@ -8,7 +8,7 @@ eachTest((name, css, json) => {
   if (name !== 'apply.css' && name !== 'custom-properties.css') {
     test('parses ' + name, () => {
       let parsed = jsonify(parse(css, { from: name }))
-      equal(parsed, json)
+      deepStrictEqual(parsed, json)
     })
   }
 })
@@ -73,9 +73,7 @@ test('fixes property without semicolon in safe mode', () => {
 })
 
 test('does not fall on missed semicolon in IE filter', () => {
-  not.throws(() => {
-    parse("a { one: two: progid:DX(a='1', b='2'); }")
-  })
+  parse("a { one: two: progid:DX(a='1', b='2'); }")
 })
 
 test('fixes double colon in safe mode', () => {
@@ -89,37 +87,50 @@ test('fixes colon instead of semicolon', () => {
 })
 
 test('fixes {} error', () => {
-  let root = parse(`:root { --example-var: { "Version": { "Build": "10.30.7.350828.20230224122352", "Source": "10.30.7.350828.1", "Required": "10.30.7.307232"; }}}; @font-face { font-family: 'Calibri'; }`)
-  equal(root.toString(), `:root { --example-var: { "Version": { "Build": "10.30.7.350828.20230224122352", "Source": "10.30.7.350828.1", "Required": "10.30.7.307232"; }}}; @font-face { font-family: 'Calibri'; }`)
+  let root = parse(
+    `:root { --example-var: { "Version": { "Build": "10.30.7.350828.20230224122352", "Source": "10.30.7.350828.1", "Required": "10.30.7.307232"; }}}; @font-face { font-family: 'Calibri'; }`
+  )
+  equal(
+    root.toString(),
+    `:root { --example-var: { "Version": { "Build": "10.30.7.350828.20230224122352", "Source": "10.30.7.350828.1", "Required": "10.30.7.307232"; }}}; @font-face { font-family: 'Calibri'; }`
+  )
 })
 
 test('Rule at the start of tokens', () => {
-  let root = parse(`.start { font-size: 16px; }`);
-  equal(root.toString(), `.start { font-size: 16px; }`);
-});
+  let root = parse(`.start { font-size: 16px; }`)
+  equal(root.toString(), `.start { font-size: 16px; }`)
+})
 
 test('Complex nested structures with JSON-like properties', () => {
-  let root = parse(`:root { --complex: {"nested": {"key": "value"}, "array": [1, {"sub": "value"}]}; } @font-face { font-family: 'Calibri'; }`);
-  equal(root.toString(), `:root { --complex: {"nested": {"key": "value"}, "array": [1, {"sub": "value"}]}; } @font-face { font-family: 'Calibri'; }`);
-});
+  let root = parse(
+    `:root { --complex: {"nested": {"key": "value"}, "array": [1, {"sub": "value"}]}; } @font-face { font-family: 'Calibri'; }`
+  )
+  equal(
+    root.toString(),
+    `:root { --complex: {"nested": {"key": "value"}, "array": [1, {"sub": "value"}]}; } @font-face { font-family: 'Calibri'; }`
+  )
+})
 
 test('Multiple rules with one JSON-like custom property', () => {
   let root = parse(`
       .class1 { margin: 10px; }
       :root { --jsonProp: {"a": 1, "b": {"c": 3}}; }
       .class2 { padding: 20px; }
-  `);
-  equal(root.toString(), `
+  `)
+  equal(
+    root.toString(),
+    `
       .class1 { margin: 10px; }
       :root { --jsonProp: {"a": 1, "b": {"c": 3}}; }
       .class2 { padding: 20px; }
-  `);
-});
+  `
+  )
+})
 
 test('Custom property at start without modifications', () => {
-  let root = parse(`--example: {"key": "value"}; .class { color: black; }`);
-  equal(root.toString(), `--example: {"key": "value"}; .class { color: black; }`);
-});
-
-test.run()
-
+  let root = parse(`--example: {"key": "value"}; .class { color: black; }`)
+  equal(
+    root.toString(),
+    `--example: {"key": "value"}; .class { color: black; }`
+  )
+})

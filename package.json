@@ -13,7 +13,7 @@
   "license": "MIT",
   "repository": "postcss/postcss-safe-parser",
   "scripts": {
-    "unit": "uvu . '\\.test\\.js$'",
+    "unit": "node --test test/parse.test.js",
     "test:unit": "pnpm unit",
     "test:lint": "eslint .",
     "test:integration": "node test/integration.js",
@@ -52,8 +52,7 @@
     "eslint-plugin-prefer-let": "^3.0.1",
     "eslint-plugin-promise": "^6.1.1",
     "postcss": "^8.4.31",
-    "postcss-parser-tests": "^8.8.0",
-    "uvu": "^0.5.6"
+    "postcss-parser-tests": "^8.8.0"
   },
   "prettier": {
     "arrowParens": "avoid",
