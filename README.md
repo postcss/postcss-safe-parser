@@ -15,10 +15,7 @@ capable of parsing any input. It is useful for:
 [Browserhacks]:      http://browserhacks.com/
 [PostCSS]:           https://github.com/postcss/postcss
 
-<a href="https://evilmartians.com/?utm_source=postcss">
-  <img src="https://evilmartians.com/badges/sponsored-by-evil-martians.svg"
-    alt="Sponsored by Evil Martians" width="236" height="54">
-</a>
+<img src="https://cdn.evilmartians.com/badges/logo-no-label.svg" alt="" width="22" height="16" />  Made at <b><a href="https://evilmartians.com/devtools?utm_source=postcss-safe-parser&utm_campaign=devtools-button&utm_medium=github">Evil Martians</a></b>, product consulting for <b>developer tools</b>.
 
 
 ## Usage
