@@ -1,6 +1,9 @@
 # Change Log
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## 7.0.1
+* Fixed JSON inside CSS support (by @dengelke).
+
 ## 7.0
 * Removed Node.js 16, 14, and 12 support.
 * Added `Root#source.end`.
