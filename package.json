@@ -9,7 +9,7 @@
     "parser",
     "fault tolerant"
   ],
-  "author": "Andrey Sitnik <andrey@sitnik.ru>",
+  "author": "Andrey Sitnik <andrey@sitnik.es>",
   "license": "MIT",
   "repository": "postcss/postcss-safe-parser",
   "scripts": {
