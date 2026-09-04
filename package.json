@@ -15,7 +15,7 @@
   "scripts": {
     "unit": "node --test test/parse.test.js",
     "test:unit": "pnpm unit",
-    "test:lint": "eslint .",
+    "test:lint": "oxlint",
     "test:integration": "node test/integration.js",
     "test": "pnpm run /^test:/"
   },
@@ -41,17 +41,12 @@
     "postcss": "^8.4.31"
   },
   "devDependencies": {
-    "@logux/eslint-config": "^53.5.1",
-    "eslint": "^9.39.5",
+    "@logux/oxc-configs": "^1.2.0",
+    "eslint-plugin-prefer-let": "^4.2.2",
+    "oxlint": "^1.81.0",
+    "oxlint-tsgolint": "^7.0.2001",
     "postcss": "^8.5.27",
-    "postcss-parser-tests": "^8.10.0"
-  },
-  "prettier": {
-    "arrowParens": "avoid",
-    "jsxSingleQuote": false,
-    "quoteProps": "consistent",
-    "semi": false,
-    "singleQuote": true,
-    "trailingComma": "none"
+    "postcss-parser-tests": "^8.10.0",
+    "typescript": "^7.0.2"
   }
 }

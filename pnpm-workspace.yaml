@@ -1,0 +1,2 @@
+minimumReleaseAgeExclude:
+  - '@logux/oxc-configs@1.2.0'
