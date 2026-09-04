@@ -2,6 +2,10 @@
 
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## 7.1.0
+
+- Added types (by @remcohaszing).
+
 ## 7.0.1
 
 - Fixed JSON inside CSS support (by @dengelke).
