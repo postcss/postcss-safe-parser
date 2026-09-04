@@ -41,8 +41,8 @@
     "postcss": "^8.4.31"
   },
   "devDependencies": {
-    "@logux/eslint-config": "^53.4.0",
-    "eslint": "^9.11.1",
+    "@logux/eslint-config": "^53.5.1",
+    "eslint": "^9.39.5",
     "postcss": "^8.5.27",
     "postcss-parser-tests": "^8.10.0"
   },
