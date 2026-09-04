@@ -42,7 +42,6 @@
   },
   "devDependencies": {
     "@logux/eslint-config": "^53.4.0",
-    "clean-publish": "^5.0.0",
     "eslint": "^9.11.1",
     "postcss": "^8.4.47",
     "postcss-parser-tests": "^8.8.0"
@@ -54,8 +53,5 @@
     "semi": false,
     "singleQuote": true,
     "trailingComma": "none"
-  },
-  "clean-publish": {
-    "cleanDocs": true
   }
 }
