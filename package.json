@@ -4,25 +4,14 @@
   "description": "Fault-tolerant CSS parser for PostCSS",
   "keywords": [
     "css",
-    "postcss",
-    "postcss-syntax",
+    "fault tolerant",
     "parser",
-    "fault tolerant"
+    "postcss",
+    "postcss-syntax"
   ],
-  "author": "Andrey Sitnik <andrey@sitnik.es>",
   "license": "MIT",
+  "author": "Andrey Sitnik <andrey@sitnik.es>",
   "repository": "postcss/postcss-safe-parser",
-  "scripts": {
-    "unit": "node --test test/parse.test.js",
-    "test:unit": "pnpm unit",
-    "test:lint": "oxlint",
-    "test:integration": "node test/integration.js",
-    "test": "pnpm run /^test:/"
-  },
-  "engines": {
-    "node": ">=18.0"
-  },
-  "main": "lib/safe-parse",
   "funding": [
     {
       "type": "opencollective",
@@ -37,8 +26,13 @@
       "url": "https://github.com/sponsors/ai"
     }
   ],
-  "peerDependencies": {
-    "postcss": "^8.4.31"
+  "main": "lib/safe-parse",
+  "scripts": {
+    "unit": "node --test test/parse.test.js",
+    "test:unit": "pnpm unit",
+    "test:lint": "oxlint",
+    "test:integration": "node test/integration.js",
+    "test": "pnpm run /^test:/"
   },
   "devDependencies": {
     "@logux/oxc-configs": "^1.2.0",
@@ -48,5 +42,11 @@
     "postcss": "^8.5.27",
     "postcss-parser-tests": "^8.10.0",
     "typescript": "^7.0.2"
+  },
+  "peerDependencies": {
+    "postcss": "^8.4.31"
+  },
+  "engines": {
+    "node": ">=18.0"
   }
 }
