@@ -34,6 +34,26 @@ test('fixes unclosed comment in safe mode', () => {
   equal(root.first.first.text, 'b')
 })
 
+test('keeps unclosed comment source positions inside the original input', () => {
+  let css = 'a {\n  /* unfinished'
+  let root = parse(css)
+  let comment = root.first.first
+  deepStrictEqual(comment.source.end, {
+    column: 15,
+    line: 2,
+    offset: css.length
+  })
+  deepStrictEqual(root.source.end, {
+    column: 16,
+    line: 2,
+    offset: css.length
+  })
+  equal(comment.source.input.css.slice(
+    comment.source.start.offset,
+    comment.source.end.offset
+  ), '/* unfinished')
+})
+
 test('fixes column and semicolumn case', () => {
   equal(parse('a{:;}').toString(), 'a{}')
 })
