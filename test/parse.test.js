@@ -78,6 +78,7 @@ test('fixes 2 properties in safe mode', () => {
   equal(root.first.nodes.length, 1)
   equal(root.first.first.prop, 'color')
   equal(root.first.first.raws.between, ' one: ')
+  equal(root.toString(), 'a { color one: white; one }')
 })
 
 test('fixes nameless at-rule in safe mode', () => {
