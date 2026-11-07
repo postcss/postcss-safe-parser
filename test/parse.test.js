@@ -5,12 +5,10 @@ let { eachTest, jsonify } = require('postcss-parser-tests')
 let parse = require('../lib/safe-parse')
 
 eachTest((name, css, json) => {
-  if (name !== 'apply.css' && name !== 'custom-properties.css') {
-    test('parses ' + name, () => {
-      let parsed = jsonify(parse(css, { from: name }))
-      deepStrictEqual(parsed, json)
-    })
-  }
+  test('parses ' + name, () => {
+    let parsed = jsonify(parse(css, { from: name }))
+    deepStrictEqual(parsed, json)
+  })
 })
 
 test('fixes unclosed blocks in safe mode', () => {
@@ -154,4 +152,17 @@ test('Custom property at start without modifications', () => {
     root.toString(),
     `--example: {"key": "value"}; .class { color: black; }`
   )
+})
+
+test('keeps {} blocks with colons in custom property values', () => {
+  let root = parse('a{--y:{a:b; c:d}; color:red}')
+  equal(root.toString(), 'a{--y:{a:b; c:d}; color:red}')
+  equal(root.first.first.prop, '--y')
+  equal(root.first.first.value, '{a:b; c:d}')
+  equal(root.first.nodes.length, 2)
+  equal(parse('a{--y: {a:b}}').toString(), 'a{--y: {a:b}}')
+})
+
+test('still fixes missed semicolon in regular declarations', () => {
+  equal(parse('a{color:red b:c}').toString(), 'a{color:red; b:c}')
 })
